@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Grade\GradeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth' ]
+    ], function(){
+        Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/', function () {
+            return view('home');
+        });
+
+        Route::resource('grade', GradeController::class);
+
+    });
