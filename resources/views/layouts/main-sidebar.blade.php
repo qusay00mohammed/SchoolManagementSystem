@@ -21,32 +21,46 @@
                         </ul>
                     </li>
                     <!-- menu title -->
-                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
+                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{ __('trans_main.program name') }}</li>
                     <!-- menu item Elements-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
-                                    class="right-nav-text">{{ __("trans_main.school grade") }}</span></div>
+                                    class="right-nav-text">{{ __("trans_main.school stage") }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ route('grade.index') }}">{{ __("trans_main.list school grade") }}</a></li>
+                            <li><a href="{{ route('stage.index') }}">{{ __("trans_main.list school stage") }}</a></li>
                         </ul>
                     </li>
                     <!-- menu item calendar-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu">
                             <div class="pull-left"><i class="ti-calendar"></i><span
-                                    class="right-nav-text">calendar</span></div>
+                                    class="right-nav-text">{{ __('trans_main.school grade') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="calendar.html">Events Calendar </a> </li>
-                            <li> <a href="calendar-list.html">List Calendar</a> </li>
+                            <li> <a href="{{ route('grade.index') }}">{{ __('trans_main.list school grade') }}</a> </li>
                         </ul>
                     </li>
+
+                     <!-- menu item calendar-->
+                     <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#section-menu">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ __('trans_main.school section') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="section-menu" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ route('section.index') }}">{{ __('trans_main.list school section') }}</a> </li>
+                        </ul>
+                    </li>
+
+
                     <!-- menu item todo-->
                     <li>
                         <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">Todo

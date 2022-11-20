@@ -32,6 +32,8 @@ NOTE: This file includes all admin Template plugins and Shortcodes. If you don't
 ======================================
 [ End table content ]
 ======================================*/
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -75,7 +77,7 @@ NOTE: This file includes all admin Template plugins and Shortcodes. If you don't
   box-sizing: border-box; }
 
 html {
-  font-family: sans-serif;
+    font-family: 'Cairo', sans-serif !important;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -101,7 +103,7 @@ section {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Cairo', sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -214,7 +216,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+    font-family: 'Cairo', sans-serif;
   font-size: 1em; }
 
 pre {
@@ -493,7 +495,7 @@ pre,
 samp {
   direction: ltr;
   unicode-bidi: bidi-override;
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  font-family: 'Cairo', sans-serif; }
 
 code {
   font-size: 87.5%;
@@ -4870,7 +4872,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Cairo', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4978,8 +4980,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-style: normal;
+  font-family: 'Cairo', sans-serif;  font-style: normal;
   font-weight: 400;
   line-height: 1.5;
   text-align: right;
@@ -8254,7 +8255,7 @@ a.fc-more:hover {
   height: 1em;
   line-height: 1em;
   font-size: 1em;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Cairo', sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -8579,7 +8580,7 @@ a.fc-more:hover {
   overflow: hidden;
   line-height: 8px;
   font-size: 11px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Cairo', sans-serif;
   text-align: center;
   cursor: s-resize; }
 

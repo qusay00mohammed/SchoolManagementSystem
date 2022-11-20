@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Grade;
 
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
+use App\Models\Stage;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -15,8 +16,15 @@ class GradeController extends Controller
      */
     public function index()
     {
+        $stage = Stage::all();
         $grade = Grade::all();
-        return view("pages.grade.grade", compact("grade"));
+        return view("pages.grade.grade", compact('stage', 'grade'));
+    }
+
+    public function filter_grade(Request $request) {
+        $stage = Stage::all();
+        $grade = Grade::where('stage_id', $request->stage_id)->get();
+        return view("pages.grade.grade", compact('stage', 'grade'));
     }
 
     /**
@@ -37,27 +45,32 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $input = $request->List_Classes;
         $request->validate([
-            "name_ar" => "required | unique:grades,name",
-            "name_en" => "required | unique:grades,name",
+            'List_Classes.*.name_ar' => 'required',
+            'List_Classes.*.name_en' => 'required',
         ]);
 
-        Grade::create([
-            'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
-            'notes' => $request->notes
-        ]);
+        foreach ($input as $in) {
+            $grade = new Grade();
+            $grade->name = ['en' => $in['name_en'], 'ar' => $in['name_ar']];
+            $grade->stage_id = $in['stage_id'];
+            $grade->save();
+        }
 
         toastr()->success(__('trans_notification.saved'));
         return redirect()->route('grade.index');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Grade  $grade
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Grade $grade)
+    public function show($id)
     {
         //
     }
@@ -65,10 +78,10 @@ class GradeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Grade  $grade
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grade $grade)
+    public function edit($id)
     {
         //
     }
@@ -77,20 +90,21 @@ class GradeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Grade  $grade
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grade $grade)
+    public function update(Request $request, $id)
     {
+        $updateGrade = Grade::findOrFail($id);
+        $input = $request->List_Classes[0];
         $request->validate([
-            "name_ar" => "required | unique:grades,name",
-            "name_en" => "required | unique:grades,name",
+            'List_Classes.*.name_ar' => 'required',
+            'List_Classes.*.name_en' => 'required',
         ]);
 
-        $grade->update([
-            $grade->name = ['en' => $request->name_en, 'ar' => $request->name_ar],
-            $grade->notes = $request->notes,
-        ]);
+        $updateGrade->name = ['en' => $input['name_en'], 'ar' => $input['name_ar']];
+        $updateGrade->stage_id = $input['stage_id'];
+        $updateGrade->save();
 
         toastr()->success(__('trans_notification.edited'));
         return redirect()->route('grade.index');
@@ -99,13 +113,23 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Grade  $grade
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grade $grade)
+    public function destroy($id)
     {
-        $grade->delete();
+        Grade::findOrFail($id)->delete();
         toastr()->success(__('trans_notification.deleted'));
         return redirect()->route('grade.index');
     }
+
+    public function delete_all_item(Request $request)
+    {
+        $delete_all_id = explode(",", $request->delete_all_id);
+        Grade::whereIn('id', $delete_all_id)->delete();
+
+        toastr()->success(__('trans_notification.deleted'));
+        return redirect()->route('grade.index');
+    }
+
 }

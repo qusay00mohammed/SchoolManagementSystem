@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Grade\GradeController;
+use App\Http\Controllers\Section\SectionController;
+use App\Http\Controllers\Stage\StageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,15 @@ Route::group(
             return view('home');
         });
 
+        Route::resource('stage', StageController::class);
+
         Route::resource('grade', GradeController::class);
+        Route::post('delete_all_item', [GradeController::class, "delete_all_item"])->name('delete_all_item');
+        Route::post('filter_grade', [GradeController::class, "filter_grade"])->name('filter_grade');
+
+        Route::resource('section', SectionController::class);
+        Route::get('filter_grade_by_stage/{id}', [SectionController::class, "filter_grade_by_stage"]);
 
     });
+
+
