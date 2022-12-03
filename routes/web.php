@@ -37,6 +37,8 @@ Route::group(
         Route::resource('section', SectionController::class);
         Route::get('filter_grade_by_stage/{id}', [SectionController::class, "filter_grade_by_stage"]);
 
+        Route::view('parents','livewire.parent.show')->name('livewire.parent');
+
     });
 
 
