@@ -77,7 +77,7 @@
               <div class="clearfix"></div>
             </a>
             <ul id="teachers" class="collapse" data-parent="#sidebarnav">
-              <li> <a href="{{ route('section.index') }}">{{ __('trans_main.school section') }}</a> </li>
+              <li> <a href="{{ route('teachers.index') }}">{{ __('trans_main.school teachers') }}</a> </li>
             </ul>
           </li>
 

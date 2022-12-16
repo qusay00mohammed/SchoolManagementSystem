@@ -24,5 +24,10 @@ class Section extends Model
         return $this->belongsToThrough(Stage::class, Grade::class);
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'section_teacher');
+    }
+
 
 }

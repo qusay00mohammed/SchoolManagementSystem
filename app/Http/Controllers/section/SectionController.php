@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Stage;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -18,7 +19,8 @@ class SectionController extends Controller
     public function index()
     {
         $stage = Stage::with('sections')->get();
-        return view('pages.section.section')->with(compact('stage'));
+        $teachers = Teacher::all();
+        return view('pages.section.section')->with(compact('stage', 'teachers'));
     }
 
     public function filter_grade_by_stage($id)
@@ -48,16 +50,20 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             "name_ar" => "required",
             "name_en" => "required",
             "grade_id" => "required",
             "stage_id" => "required",
+            "teacher_id" => "required",
         ]);
         $section = new Section();
         $section->name = ['ar' => $request->name_ar, 'en' => $request->name_en];
         $section->grade_id = $request->grade_id;
         $section->save();
+
+        $section->teachers()->sync($request->teacher_id);
 
         toastr()->success(__('trans_notification.saved'));
         return redirect()->route('section.index');
@@ -101,6 +107,8 @@ class SectionController extends Controller
             "grade_id" => "required",
             "stage_id" => "required",
             "status" => "required",
+            "teacher_id" => "required",
+
         ]);
 
         $section->name = ['ar' => $request->name_ar, 'en' => $request->name_en];
@@ -111,6 +119,7 @@ class SectionController extends Controller
             $section->status = 1;
         }
         $section->save();
+        $section->teachers()->sync($request->teacher_id);
 
         toastr()->success(__('trans_notification.edited'));
         return redirect()->route('section.index');

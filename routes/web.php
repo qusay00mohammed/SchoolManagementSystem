@@ -3,6 +3,7 @@
 use App\Http\Controllers\Grade\GradeController;
 use App\Http\Controllers\Section\SectionController;
 use App\Http\Controllers\Stage\StageController;
+use App\Http\Controllers\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,8 @@ Route::group(
         Route::get('filter_grade_by_stage/{id}', [SectionController::class, "filter_grade_by_stage"]);
 
         Route::view('parents','livewire.parent.show')->name('livewire.parent');
+
+        Route::resource('teachers', TeacherController::class);
 
     });
 
